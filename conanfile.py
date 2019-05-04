@@ -14,7 +14,7 @@ class Kf5atticaConan(ConanFile):
     default_options = "shared=False"
     generators = "cmake_paths"
     build_requires = "cmake_installer/3.13.0@conan/stable"
-    requires = ("extra-cmake-modules/5.57.0@azubieta/stable", "qt/5.12.2@bincrafters/stable")
+    requires = ("extra-cmake-modules/5.57.0@appimage-conan-community/stable", "qt/5.12.2@bincrafters/stable")
 
     def system_requirements(self):
         pkgs_name = None
