@@ -1,4 +1,4 @@
-from conans import ConanFile, CMake
+from conans import ConanFile, CMake, tools
 
 
 class Kf5atticaConan(ConanFile):
@@ -15,6 +15,16 @@ class Kf5atticaConan(ConanFile):
     generators = "cmake_paths"
     build_requires = "cmake_installer/3.13.0@conan/stable"
     requires = ("extra-cmake-modules/5.57.0@azubieta/stable", "qt/5.12.2@bincrafters/stable")
+
+    def system_requirements(self):
+        pkgs_name = None
+        if tools.os_info.linux_distro == "ubuntu":
+            pkgs_name = ["libicu-dev", "libglib2.0-dev"]
+
+        if pkgs_name:
+            installer = tools.SystemPackageTool()
+            for pkg_name in pkgs_name:
+                installer.install(pkg_name)
 
     def source(self):
         self.run("git clone https://github.com/KDE/attica.git --depth=1 --branch=v5.57.0")

@@ -6,7 +6,6 @@ from conans import ConanFile, CMake, tools
 class Kf5atticaTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake_paths"
-    requires = ("qt/5.12.2@bincrafters/stable")
     build_requires = "cmake_installer/3.13.0@conan/stable"
 
     def build(self):
