@@ -1,26 +1,28 @@
-
 env:
-   global:
-     - CONAN_REFERENCE: "kf5-attica/5.57.0"
-     - CONAN_USERNAME: "appimage-conan-community"
-     - CONAN_LOGIN_USERNAME: "azubieta"
-     - CONAN_CHANNEL: "stable"
-     - CONAN_UPLOAD: "https://api.bintray.com/conan/appimage-conan-community/public-conan"
+  global:
+    - CONAN_REFERENCE: "kf5-attica/5.57.0"
+    - CONAN_USERNAME: "appimage-conan-community"
+    - CONAN_LOGIN_USERNAME: "azubieta"
+    - CONAN_CHANNEL: "stable"
+    - CONAN_UPLOAD: "https://api.bintray.com/conan/appimage-conan-community/public-conan"
 
 linux: &linux
-   os: linux
-   dist: xenial
-   sudo: required
-   language: python
-   python: "3.6"
-   services:
-     - docker
+  os: linux
+  dist: xenial
+  sudo: required
+  language: python
+  python: "3.6"
+  services:
+    - docker
 
 matrix:
-   include:
+  include:
 
-      - <<: *linux
-        env: CONAN_GCC_VERSIONS=4.8 CONAN_DOCKER_IMAGE=conanio/gcc48 CONAN_UPLOAD_DEPENDENCIES="all" CONAN_ARCHS="x86_64"
+    - <<: *linux
+      env: CONAN_GCC_VERSIONS=4.8 CONAN_DOCKER_IMAGE=conanio/gcc48 CONAN_UPLOAD_DEPENDENCIES="all" CONAN_ARCHS="x86_64" CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2
+
+    - <<: *linux
+      env: CONAN_GCC_VERSIONS=4.8 CONAN_DOCKER_IMAGE=conanio/gcc48 CONAN_UPLOAD_DEPENDENCIES="all" CONAN_ARCHS="x86_64" CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2
 
 install:
   - chmod +x .travis/install.sh
